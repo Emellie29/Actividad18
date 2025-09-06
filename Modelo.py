@@ -1,3 +1,8 @@
+import unicodedata
+
+def normalizar(texto):
+    return unicodedata.normalize("NFKD", texto).encode("ASCII", "ignore").decode().capitalize()
+
 class Participantes:
     def __init__(self, nombre, institucion):
         self.nombre = nombre
@@ -17,10 +22,11 @@ class BandaEscolar(Participantes):
         self.set_categoria(categoria)
 
     def set_categoria(self, categoria):
-        if categoria == self.Categorias_Validas:
+        categoria = normalizar(categoria.strip())
+        if categoria in [normalizar(c) for c in self.Categorias_Validas]:
             self._categoria = categoria
         else:
-            raise ValueError("Categoria incorrecta")
+            raise ValueError("Categoría inválida")
 
     def registrar_puntajes(self, puntajes):
         if set(puntajes.keys()) != set(self.Criterios):
@@ -50,7 +56,7 @@ class Concurso:
             raise ValueError(f"Nombre de banda duplicado")
         self.bandas[banda.nombre] = banda
         with open("bandas.txt", "a", encoding="utf-8") as f:
-            f.write(f"{banda.nombre} - {banda.institucion} - {banda.categoria}\n")
+            f.write(f"{banda.nombre} - {banda.institucion} - {banda._categoria}\n")
 
     def registrar_eveluacion(self, nombre_banda, puntajes):
         if nombre_banda not in self.bandas:
