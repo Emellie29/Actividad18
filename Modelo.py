@@ -34,16 +34,21 @@ class BandaEscolar(Participantes):
         for v in puntajes.values():
             if not (0 <= v <= 10):
                 raise ValueError("El puntaje debe ser entre 0 y 10")
-            self._puntajes = puntajes
+        self._puntajes = puntajes
     @property
     def total(self):
-        return sum(self._puntajes.values() if self._puntajes else 0)
+        return sum(self._puntajes.values()) if self._puntajes else 0
+
+    @property
+    def categoria(self):
+        return self._categoria
 
     def mostrar_info(self):
         base = super().mostrar_info()
         info = f"{base} - {self._categoria}"
         if self._puntajes:
             info += f" - Total: {self.total}"
+        return info
 
 class Concurso:
     def __init__(self, nombre, fecha):
@@ -51,7 +56,7 @@ class Concurso:
         self.fecha = fecha
         self.bandas = {}
 
-    def incribir_banda(self, banda):
+    def inscribir_banda(self, banda):
         if banda.nombre in self.bandas:
             raise ValueError(f"Nombre de banda duplicado")
         self.bandas[banda.nombre] = banda

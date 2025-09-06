@@ -35,7 +35,7 @@ class Septiembre:
         categoria = simpledialog.askstring("Categoría", "Categoría (Primaria, Básico, Diversificado): ")
         try:
             banda = BandaEscolar(nombre, institucion, categoria)
-            self.concurso.incribir_banda(banda)
+            self.concurso.inscribir_banda(banda)
             messagebox.showinfo("Banda inscrita correctamente.")
         except ValueError as e:
             messagebox.showerror("Error", str(e))
@@ -48,7 +48,7 @@ class Septiembre:
             puntajes[criterio] = valor
             try:
                 self.concurso.registrar_evaluacion(nombre, puntajes)
-                messagebox.shoeinfo("Evaluacion registrada correctamente.")
+                messagebox.showinfo("Evaluacion registrada correctamente.")
             except ValueError as e:
                 messagebox.showerror("Error", str(e))
 
