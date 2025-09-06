@@ -30,6 +30,7 @@ class Septiembre:
         self.ventana.config(menu=barra)
 
     def inscribir_banda(self):
+        self.ventana.geometry("500x300")
         nombre = simpledialog.askstring("Nombre", "Nombre de la banda: ")
         institucion = simpledialog.askstring("Institución", "Nombre de la institución: ")
         categoria = simpledialog.askstring("Categoría", "Categoría (Primaria, Básico, Diversificado): ")
@@ -41,10 +42,11 @@ class Septiembre:
             messagebox.showerror("Error", str(e))
 
     def registrar_evaluacion(self):
+        self.ventana.geometry("500x300")
         nombre = simpledialog.askstring("Nombre", "Nombre de la banda: ")
         puntajes = {}
         for criterio in BandaEscolar.Criterios:
-            valor = simpledialog.askfloat("Puntaje", f"{criterio} (o-10): ", minvalue=0, maxvalue=10)
+            valor = simpledialog.askfloat("Puntaje", f"{criterio} (0-10): ", minvalue=0, maxvalue=10)
             puntajes[criterio] = valor
             try:
                 self.concurso.registrar_evaluacion(nombre, puntajes)
@@ -53,12 +55,14 @@ class Septiembre:
                 messagebox.showerror("Error", str(e))
 
     def listar_bandas(self):
+        self.ventana.geometry("500x300")
         ventana = tk.Toplevel(self.ventana)
         ventana.title("Lista de Bandas")
         for info in self.concurso.listar_bandas():
             tk.Label(ventana, text=info, anchor="w").pack(fill="x")
 
     def ver_ranking(self):
+        self.ventana.geometry("500x300")
         ventana = tk.Toplevel(self.ventana)
         ventana.title("Ranking Final")
         ranking = self.concurso.ranking()
