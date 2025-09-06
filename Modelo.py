@@ -35,6 +35,7 @@ class BandaEscolar(Participantes):
             if not (0 <= v <= 10):
                 raise ValueError("El puntaje debe ser entre 0 y 10")
         self._puntajes = puntajes
+
     @property
     def total(self):
         return sum(self._puntajes.values()) if self._puntajes else 0
@@ -61,7 +62,7 @@ class Concurso:
             raise ValueError(f"Nombre de banda duplicado")
         self.bandas[banda.nombre] = banda
         with open("bandas.txt", "a", encoding="utf-8") as f:
-            f.write(f"{banda.nombre} - {banda.institucion} - {banda._categoria}\n")
+            f.write(f"{banda.nombre} - {banda.institucion} - {banda.categoria}\n")
 
     def registrar_evaluacion(self, nombre_banda, puntajes):
         if nombre_banda not in self.bandas:

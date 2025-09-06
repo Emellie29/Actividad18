@@ -46,11 +46,11 @@ class Septiembre:
         for criterio in BandaEscolar.Criterios:
             valor = simpledialog.askfloat("Puntaje", f"{criterio} (0-10): ", minvalue=0, maxvalue=10)
             puntajes[criterio] = valor
-            try:
-                self.concurso.registrar_evaluacion(nombre, puntajes)
-                messagebox.showinfo("Evaluacion registrada correctamente.")
-            except ValueError as e:
-                messagebox.showerror("Error", str(e))
+        try:
+             self.concurso.registrar_evaluacion(nombre, puntajes)
+             messagebox.showinfo("Evaluacion registrada correctamente.")
+        except ValueError as e:
+             messagebox.showerror("Error", str(e))
 
     def listar_bandas(self):
         ventana = tk.Toplevel(self.ventana)
