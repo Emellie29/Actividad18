@@ -58,7 +58,7 @@ class Concurso:
         with open("bandas.txt", "a", encoding="utf-8") as f:
             f.write(f"{banda.nombre} - {banda.institucion} - {banda._categoria}\n")
 
-    def registrar_eveluacion(self, nombre_banda, puntajes):
+    def registrar_evaluacion(self, nombre_banda, puntajes):
         if nombre_banda not in self.bandas:
             raise ValueError(f"Banda no encontrada")
         banda = self.bandas[nombre_banda]
