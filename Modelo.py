@@ -98,7 +98,7 @@ class Concurso:
                         nombre = partes[0]
                         puntajes_raw = partes[1]
                         puntajes = {}
-                        for par in puntajes_raw.split(":"):
+                        for par in puntajes_raw.split(","):
                             criterio, valor = par.split(":")
                             puntajes[criterio.strip()] = float(valor)
                         if nombre in self.bandas:
