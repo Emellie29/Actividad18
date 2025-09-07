@@ -78,3 +78,30 @@ class Concurso:
     def ranking(self):
         evaluadas = [b for b in self.bandas.values() if b._puntajes]
         return sorted(evaluadas, key=lambda b: (-b.total, b.nombre))
+
+    def cargar_datos(self):
+        try:
+            with open("bandas.txt", "r", encoding="utf-8") as f:
+                for linea in f:
+                    partes = linea.strip().split(" - ")
+                    if len(partes) == 3:
+                        nombre, institucion, categoria = partes
+                        banda = BandaEscolar(nombre, institucion, categoria)
+                        self.bandas[nombre] = banda
+        except FileNotFoundError:
+            pass
+        try:
+            with open("evaluaciones.txt", "r", encoding="utf-8") as f:
+                for linea in f:
+                    partes = linea.strip().split(" - ")
+                    if len(partes) >= 3:
+                        nombre = partes[0]
+                        puntajes_raw = partes[1]
+                        puntajes = {}
+                        for par in puntajes_raw.split(":"):
+                            criterio, valor = par.split(":")
+                            puntajes[criterio.strip()] = float(valor)
+                        if nombre in self.bandas:
+                            self.bandas[nombre].registrar_puntajes(puntajes)
+        except FileNotFoundError:
+            pass

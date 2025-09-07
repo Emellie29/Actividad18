@@ -5,6 +5,7 @@ from Modelo import BandaEscolar, Concurso
 class Septiembre:
     def __init__(self):
         self.concurso = Concurso("Concurso de bandas 14 de Septiembre", "14-09-2025")
+        self.concurso.cargar_datos()
         self.ventana = tk.Tk()
         self.ventana.title("Concurso de bandas Quetzaltenango")
         self.ventana.geometry("500x300")
